@@ -17,15 +17,11 @@ import matplotlib.pyplot as plt
 from pylab import *
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.animation as animation
+from matplotlib.widgets import Slider, Button
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import tkinter as Tk
 
 class Animate:
-
-    def flow(self):
-        data = []
-        fig = figure()
-        ax = Axes3D(fig, azim=-40,elev=30)
-        sphere = Bloch(axes=ax)
-        print('x')
 
     '''Frame to be drawn at each step of the iterable.
     '''
@@ -43,6 +39,17 @@ class Animate:
         self.sphere.vector_color = ['g']
         return self.ax
 
+    '''Useless piece of shit poopoo function used for, guess what,
+    absolutely nothing.
+    '''
+    def flow(self):
+        data = []
+        fig = figure()
+        ax = Axes3D(fig, azim=-40,elev=30)
+        sphere = Bloch(axes=ax)
+        print('x')
+
+
     '''Function that is called when the Animation object needs to be animated.
     '''
     def animation(self):
@@ -56,6 +63,14 @@ class Animate:
         slder1 = Slider(axSlider1, 'slider 1', valmin=0, valmax=100)
 
         anim_running = True
+
+        # root = Tk.Tk()
+        #
+        # label = Tk.Label(root,text="SHM Simulation").grid(column=0, row=0)
+        #
+        # canvas = FigureCanvasTkAgg(self.fig, master=root)
+        # canvas.get_tk_widget().grid(column=0,row=1)
+
 
         self.ani = animation.FuncAnimation(self.fig, self.animate, self.data,
         init_func=self.init,interval=1.0,
@@ -74,6 +89,8 @@ class Animate:
 
         # ani.save('basic_animation.mp4', fps=25)
         self.sphere.show()
+        # Tk.mainloop()
+
 
     '''Constructor. Called with the array of data that is inputted to create the animation object
     that uses the data over a constant time step.
