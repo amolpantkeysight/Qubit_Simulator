@@ -20,6 +20,7 @@ import matplotlib.animation as animation
 from matplotlib.widgets import Slider, Button
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as Tk
+import animatplot as anplt
 
 class Animate:
 
@@ -91,6 +92,24 @@ class Animate:
         self.sphere.show()
         # Tk.mainloop()
 
+    def animatplot_animation(self):
+        def new_animation(i, *args):
+            self.sphere.clear()
+            self.sphere.add_states(args[i])
+            # self.sphere.add_vectors([0,np.sin(i),np.sin(i) + np.cos(i)])
+            # sphere.add_points([sx[:i+1],sy[:i+1],sz[:i+1]])
+            self.sphere.make_sphere()
+            return self.ax
+
+        self.fig = figure()
+        self.ax = Axes3D(self.fig, azim=-40,elev=30)
+        plt.subplots_adjust(left=0.1, bottom=0.01)
+        self.sphere = Bloch(axes=self.ax)
+
+        block = anplt.blocks.Update(new_animation, len(self.data), self.data, self.ax)
+        ani_new = anplt.Animation([block])
+        ani_new.controls() # creates a timeline_slider and a play/pause toggle
+        self.sphere.show()
 
     '''Constructor. Called with the array of data that is inputted to create the animation object
     that uses the data over a constant time step.
