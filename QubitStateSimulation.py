@@ -68,8 +68,8 @@ def rSimS(sObj,InitialState): #Here we define a recursive function to track the 
 a=rSim(simD1,q)
 
 front_end = Animate(a)
-# front_end.animation()
-front_end.animatplot_animation()
+front_end.animation()
+# front_end.animatplot_animation()
 # b.add_states(a,kind='point')
 # b.show()
 #

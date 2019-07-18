@@ -57,8 +57,9 @@ class Animate:
         # data = []
         self.fig = figure()
         self.ax = Axes3D(self.fig, azim=-40,elev=30)
-        plt.subplots_adjust(left=0.1, bottom=0.01)
+        # plt.subplots_adjust(left=0.1, bottom=0.01)
         self.sphere = Bloch(axes=self.ax)
+        print(type(self.sphere))
 
         axSlider1 = plt.axes([0.1, 0.1, 0.8, 0.02])
         slder1 = Slider(axSlider1, 'slider 1', valmin=0, valmax=100)
@@ -103,7 +104,7 @@ class Animate:
 
         self.fig = figure()
         self.ax = Axes3D(self.fig, azim=-40,elev=30)
-        plt.subplots_adjust(left=0.1, bottom=0.01)
+        # plt.subplots_adjust(left=0.1, bottom=0.01)
         self.sphere = Bloch(axes=self.ax)
 
         block = anplt.blocks.Update(new_animation, len(self.data), self.data, self.ax)
