@@ -62,7 +62,7 @@ class Animate:
 
         self.ani = animation.FuncAnimation(self.fig, self.animate, self.data,
         init_func=self.init,interval=1.0,
-        repeat=False)\
+        repeat=False)
 
         def onClick(event):
             nonlocal anim_running
