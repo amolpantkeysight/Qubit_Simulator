@@ -21,6 +21,7 @@ from matplotlib.widgets import Slider, Button
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as Tk
 import animatplot as anplt
+import player as ply
 
 class Animate:
 
@@ -59,10 +60,8 @@ class Animate:
         self.ax = Axes3D(self.fig, azim=-40,elev=30)
         # plt.subplots_adjust(left=0.1, bottom=0.01)
         self.sphere = Bloch(axes=self.ax)
-        print(type(self.sphere))
-
-        axSlider1 = plt.axes([0.1, 0.1, 0.8, 0.02])
-        slder1 = Slider(axSlider1, 'slider 1', valmin=0, valmax=100)
+        # axSlider1 = plt.axes([0.1, 0.1, 0.8, 0.02])
+        # slder1 = Slider(axSlider1, 'slider 1', valmin=0, valmax=100)
 
         anim_running = True
 
@@ -74,20 +73,21 @@ class Animate:
         # canvas.get_tk_widget().grid(column=0,row=1)
 
 
-        self.ani = animation.FuncAnimation(self.fig, self.animate, self.data,
-        init_func=self.init,interval=1.0,
-        repeat=False)
+        # self.ani = animation.FuncAnimation(self.fig, self.animate, self.data,
+        # init_func=self.init,interval=1.0,
+        # repeat=False)\
+        self.ani = ply.Player(self.fig, self.animate, init_func=self.init, fargs=self.data)
 
-        def onClick(event):
-            nonlocal anim_running
-            if anim_running:
-                self.ani.event_source.stop()
-                anim_running = False
-            else:
-                self.ani.event_source.start()
-                anim_running = True
-
-        self.fig.canvas.mpl_connect('button_press_event', onClick)
+        # def onClick(event):
+        #     nonlocal anim_running
+        #     if anim_running:
+        #         self.ani.event_source.stop()
+        #         anim_running = False
+        #     else:
+        #         self.ani.event_source.start()
+        #         anim_running = True
+        #
+        # self.fig.canvas.mpl_connect('button_press_event', onClick)
 
         # ani.save('basic_animation.mp4', fps=25)
         self.sphere.show()
