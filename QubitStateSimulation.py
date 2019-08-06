@@ -36,14 +36,11 @@ def rn(theta, phi, dphi, n): #Here we define a recursive function to track the e
     else:
         return rn(theta,phi,dphi,n-1)*r(theta, phi + n*dphi)
 
-#a=np.array([rn(0.05,0,0.05,i)*q for i in range(90)])
-#a=np.array([r(i*np.pi/40,np.pi/40*i)*q for i in range(60)])
-
 
 
 #Generate some fake amp and phase data
 
-simD1 = SimData(npoints=50,detuning=0, amp=0.1, phase=np.pi/2)
+simD1 = SimData(npoints=1000,detuning=0.002, amp=0.1, phase=np.pi/2)
 
 """
 A function for rotating the qubit state based on a SimData object
@@ -63,19 +60,7 @@ def rSimS(sObj,InitialState): #Here we define a recursive function to track the 
         state[i+1]=rz(-sObj.Phases[i])*state[i+1]
     return state
 
-# plt.plot(simD1.Phases)
-
 a=rSim(simD1,q)
 
 front_end = Animate(a)
 front_end.animation()
-# front_end.animatplot_animation()
-# b.add_states(a,kind='point')
-# b.show()
-#
-# N = num(2)
-# expArray = np.array([expect(N,a[i]) for i in range(len(a))])
-# plt.ylabel('P(|1>)')
-# plt.xlabel('t (ns)')
-# plt.ylim(0, 1)
-# plt.plot(expArray)

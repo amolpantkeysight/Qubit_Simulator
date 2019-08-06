@@ -23,15 +23,26 @@ with open('C:\\Users\\amolpant\\Documents\\ScopeDataRetrieval\\data.csv', newlin
     data_two = list(csv.reader(csvfile))
 
 #Converts array from 2D to 1D.
+
 data = data_two[0]
 
+data.pop(len(data)-1)
+data = list(map(float, data))
 #Intermediate step to write data onto a .txt file named 'out'.
 with open('C:\\Users\\amolpant\\Documents\\ScopeDataRetrieval\\out', 'w+') as f:
     for item in data:
         f.write("%s\n" % item)
 
-# print(type(data[0]))
+print(type(data[0]))
 
-front_end = Animate(data)
+output = np.fft.fft(data)
 
-front_end.animation()
+leg = plt.legend()
+# get the individual lines inside legend and set line width
+for line in leg.get_lines():
+    line.set_linewidth(0.00001)
+
+# plt.plot(data)
+
+plt.plot(output)
+plt.show()
